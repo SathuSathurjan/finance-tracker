@@ -1,20 +1,22 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:personal_finance_tracker/widgets/auth_gate.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await dotenv.load(fileName:".env");
 
   if (kIsWeb) {
     await Firebase.initializeApp(
       options: FirebaseOptions(
-        apiKey: "AIzaSyDCqfwfFxu9a_7z4b7T0lrq-7o2cRjl-HI",
-        authDomain: "finance-tracker-b8fc3.firebaseapp.com",
-        projectId: "finance-tracker-b8fc3",
-        storageBucket: "finance-tracker-b8fc3.firebasestorage.app",
-        messagingSenderId: "903686476438",
-        appId: "1:903686476438:web:f8a3f34e1b5e521486e8b7",
+        apiKey: dotenv.env['API_KEY']!,
+        authDomain: dotenv.env['AUTH_DOMAIN']!,
+        projectId: dotenv.env['PROJECT_ID']!,
+        storageBucket: dotenv.env['STORAGE_BUCKET']!,
+        messagingSenderId: dotenv.env['MESSAGING_SENDER_ID']!,
+        appId: dotenv.env['APP_ID']!,
       ),
     );
   } else {
